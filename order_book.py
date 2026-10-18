@@ -31,12 +31,9 @@ class Order_Book:
         self.ask_level = {}
         self.order_lookup = {}
 
-    def order_details(self,price:int, side:int,  quantity:int):
+    def order_details(self,o:Order,side:int):
         if side == 0 :
             #bid
-            self.sequence = self.sequence + 1
-            self.id += 1
-            o = Order(price,self.sequence,self.id,side,quantity)
             self.order_lookup[o.id] = o
             
             if o.price in self.bid_level:
@@ -48,9 +45,6 @@ class Order_Book:
 
         elif side == 1 :
             #ask
-            self.sequence = self.sequence + 1
-            self.id += 1
-            o = Order(price,self.sequence,self.id,side,quantity)
             self.order_lookup[o.id] = o
             
             if o.price in self.ask_level:
@@ -87,7 +81,7 @@ class Order_Book:
 
     def cancel_order(self,order_id:int):
         order = self.order_lookup.get(order_id)
-        if order == None:
+        if order is None:
             return None
         if order.side == 0:
             self.bid_level[order.price].remove(order)
@@ -108,3 +102,9 @@ class Order_Book:
 
 
 
+    def create_order(self,price:int, side:int, quantity:int):
+        self.sequence = self.sequence + 1
+        self.id += 1
+        o = Order(price,self.sequence,self.id,side,quantity)
+
+        return o
