@@ -1,9 +1,0 @@
-Metadata-Version: 2.4
-Name: order-book-matching
-Version: 0.1.0
-Summary: A Python limit order book and matching engine with price-time priority
-Requires-Python: >=3.14
-Description-Content-Type: text/markdown
-Provides-Extra: dev
-Requires-Dist: pytest; extra == "dev"
-Requires-Dist: hypothesis; extra == "dev"

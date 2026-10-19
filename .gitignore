@@ -1,7 +1,14 @@
+# Personal notes
 doc.txt
 learnt.txt
+
+# Python-generated files
 __pycache__/
+*.py[cod]
 .pytest_cache/
 .hypothesis/
-.trunk/
-*.py[cod]
+
+# Build and packaging artifacts
+*.egg-info/
+build/
+dist/
