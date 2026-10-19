@@ -1,2 +1,7 @@
 doc.txt
 learnt.txt
+__pycache__/
+.pytest_cache/
+.hypothesis/
+.trunk/
+*.py[cod]

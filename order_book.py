@@ -3,20 +3,15 @@ import heapq
 
 @dataclass
 class Order:
-    price:int
-    sequence_no:int
+    price:int | None
     id:int
     side:int
     quantity:int
 
     def __lt__(self,other):
         if(self.side == 0):
-            if(self.price == other.price):
-                return self.sequence_no > other.sequence_no
             return self.price < other.price 
         if(self.side == 1):
-            if(self.price == other.price):
-                return self.sequence_no < other.sequence_no
             return self.price < other.price 
 
 
@@ -25,13 +20,14 @@ class Order_Book:
     def __init__(self):
         self.bid = []
         self.ask = []
-        self.sequence = 0
         self.id = 0
         self.bid_level = {}
         self.ask_level = {}
         self.order_lookup = {}
 
     def order_details(self,o:Order,side:int):
+        if o.price is None:
+            raise ValueError('Price is None')
         if side == 0 :
             #bid
             self.order_lookup[o.id] = o
@@ -103,8 +99,7 @@ class Order_Book:
 
 
     def create_order(self,price:int, side:int, quantity:int):
-        self.sequence = self.sequence + 1
         self.id += 1
-        o = Order(price,self.sequence,self.id,side,quantity)
+        o = Order(price,self.id,side,quantity)
 
         return o
